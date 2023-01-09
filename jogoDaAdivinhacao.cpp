@@ -10,6 +10,8 @@ int main (){
 
     int numeroSecreto = 42;
     int chute;
+    bool acertou = chute == numeroSecreto;
+    bool maior = chute > numeroSecreto;
 
     cout << "O numero secreto e " << numeroSecreto << ". Nao conte para ninguem!" << endl;
 
@@ -19,11 +21,11 @@ int main (){
         cin >> chute;
         cout << "O valor do seu chute e: " << chute << endl;
 
-        if (chute == numeroSecreto){
+        if (acertou){
             cout << "Parabens! Voce acertou o numero secreto!" << endl;
         }
 
-        else if (chute > numeroSecreto){
+        else if (maior){
             cout << "Seu chute foi maior que o numero secreto!" << endl;
         }
 

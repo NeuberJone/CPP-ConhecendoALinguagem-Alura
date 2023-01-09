@@ -2,15 +2,52 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <fstream>
+#include <ctime>
+#include <cstdlib>
 
 using namespace std;
 
-const string PALAVRA_SECRETA = "MELANCIA";
+string palavraSecreta = "MELANCIA";
+
 map <char, bool> chutou;
 vector <char> chutesErrados;
 
+vector<string> leArquivo(){
+    ifstream arquivo;
+    arquivo.open("palavras.txt");
+
+    if(arquivo.is_open()){
+
+        int quantidadePalavras;
+        arquivo >> quantidadePalavras;
+
+        vector <string> palavrasDoArquivo;
+
+        for (int i=0;i<quantidadePalavras;i++){
+            string palavraLida;
+            arquivo >> palavraLida;
+            palavrasDoArquivo.push_back(palavraLida);
+        }
+        arquivo.close();
+        return palavrasDoArquivo;
+    } else {
+        cout << "Nao foi possivel acessar o banco de palavras." << endl;
+        exit (0);
+    }
+}
+
+void sorteiaPalavra() {
+    vector<string> palavras = leArquivo();
+
+    srand(time(NULL));
+    int indiceSorteado = rand() % palavras.size();
+
+    palavraSecreta = palavras[indiceSorteado];
+}
+
 bool letraExiste (char chute){
-    for(char letra : PALAVRA_SECRETA){
+    for(char letra : palavraSecreta){
         if(chute == letra){
                 return true;
         }
@@ -34,7 +71,7 @@ void mostraErros(){
 }
 
 void mostraPalavra(){
-    for(char letra : PALAVRA_SECRETA){
+    for(char letra : palavraSecreta){
         if (chutou [letra]){
             cout << letra << " ";
         }
@@ -63,7 +100,7 @@ void chuta(){
 }
 
 bool naoAcertou(){
-    for(char letra : PALAVRA_SECRETA){
+    for(char letra : palavraSecreta){
         if(!chutou[letra]){
             return true;
         }
@@ -78,8 +115,10 @@ bool naoEnforcou(){
 int main (){
 
     imprimeCabecalho();
+    leArquivo();
+    sorteiaPalavra();
     
-    cout << "A palavra secreta e: " << PALAVRA_SECRETA << endl;
+    cout << "A palavra secreta e: " << palavraSecreta << endl;
 
     while(naoAcertou() && naoEnforcou()){
 
@@ -89,10 +128,10 @@ int main (){
     }
 
     if(naoAcertou()){
-        cout << "QUE PENA! Voce perdeu! A palavra secreta era: " << PALAVRA_SECRETA << endl; 
+        cout << "QUE PENA! Voce perdeu! A palavra secreta era: " << palavraSecreta << endl; 
     }
     else {
-        cout << "PARABENS! Voce acertou! A palavra secreta era: " << PALAVRA_SECRETA << endl; 
+        cout << "PARABENS! Voce acertou! A palavra secreta era: " << palavraSecreta << endl; 
     }
 
 }

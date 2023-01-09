@@ -112,6 +112,39 @@ bool naoEnforcou(){
     return chutesErrados.size() < 5;
 }
 
+void salvaArquivo(vector<string> novaLista){
+    ofstream arquivo;
+    arquivo.open("palavras.txt");
+    if(arquivo.is_open()){
+
+        arquivo << novaLista.size() << endl;
+
+        for(string palavra : novaLista){
+            arquivo << palavra << endl;
+        }
+
+        arquivo.close();
+    } else {
+        cout << "Nao foi possivel acessar o banco de palavras." << endl;
+        exit (0);
+    }
+
+}
+
+void adicionaPalavra(){
+
+    cout << "Digite a nova palavra utilizando letras maiusculas: ";
+    string novaPalavra;
+    cin >> novaPalavra;
+
+    vector<string> listaPalavras = leArquivo();
+    listaPalavras.push_back(novaPalavra);
+
+    salvaArquivo(listaPalavras);
+
+    cout << "A palavra " << novaPalavra << " foi adicionada ao banco de palavras com sucesso" << endl;
+}
+
 int main (){
 
     imprimeCabecalho();
@@ -131,7 +164,13 @@ int main (){
         cout << "QUE PENA! Voce perdeu! A palavra secreta era: " << palavraSecreta << endl; 
     }
     else {
+        char resposta;
         cout << "PARABENS! Voce acertou! A palavra secreta era: " << palavraSecreta << endl; 
+        cout << "Gostaria de adicionar uma palavra ao banco? (S/N):  ";
+        cin >> resposta;
+        if(resposta == 'S'){
+            adicionaPalavra();
+        }
     }
 
 }

@@ -18,6 +18,19 @@ bool letraExiste (char chute){
     return false;
 }
 
+bool naoAcertou(){
+    for(char letra : PALAVRA_SECRETA){
+        if(!chutou[letra]){
+            return true;
+        }
+    }
+    return false;
+}
+
+bool naoEnforcou(){
+    return chutesErrados.size() < 5;
+}
+
 int main (){
 
     cout << "********************************" << endl;
@@ -26,13 +39,8 @@ int main (){
     cout << endl;
     
     cout << "A palavra secreta e: " << PALAVRA_SECRETA << endl;
-    
-    
 
-    bool naoAcertou = true;
-    bool naoEnforcou = true;
-
-    while(naoAcertou && naoEnforcou){
+    while(naoAcertou() && naoEnforcou()){
 
         cout << "Seus chutes errados: ";
         for(char letra : chutesErrados){
@@ -64,6 +72,13 @@ int main (){
             chutesErrados.push_back(chute);
         }
         cout << endl;
+    }
+
+    if(!naoAcertou()){
+        cout << "PARABENS! Voce acertou! A palavra secreta era: " << PALAVRA_SECRETA << endl; 
+    }
+    else {
+        cout << "QUE PENA! Voce perdeu! A palavra secreta era: " << PALAVRA_SECRETA << endl; 
     }
 
 }

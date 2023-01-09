@@ -8,7 +8,8 @@ int main (){
 
     cout << "**************************************" << endl;
     cout << "* Bem-vindos ao jogo da adivinhacao! *" << endl;
-    cout << "**************************************" << endl << endl;
+    cout << "**************************************" << endl;
+    cout << endl;
 
     cout << "Escolha o seu nivel de dificuldade: " << endl;
     cout << "Facil (F), Medio (M) ou Dificil (D)" << endl;
@@ -54,18 +55,20 @@ int main (){
         bool maior = chute > NUMERO_SECRETO;
 
         if (acertou){
-            cout << "Parabens! Voce acertou o numero secreto!" << endl << endl;
+            cout << "Parabens! Voce acertou o numero secreto!" << endl;
+            cout << endl;
             break;
         }
 
         else if (maior){
-            cout << "Seu chute foi maior que o numero secreto!" << endl << endl;
+            cout << "Seu chute foi maior que o numero secreto!" << endl;
+            cout << endl;
         }
 
         else {
-            cout << "Seu chute foi menor que numero secreto!" << endl << endl;
+            cout << "Seu chute foi menor que numero secreto!" << endl;
+            cout << endl;
         }
-
     }
 
     cout << "Fim de Jogo" << endl;

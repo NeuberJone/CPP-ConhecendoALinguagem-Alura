@@ -35,7 +35,7 @@ int main (){
     int tentativas = 0;
     double pontos = 1000.0;
 
-    cout << "O numero secreto e " << NUMERO_SECRETO << ". Nao conte para ninguem!" << endl << endl;
+    //cout << "O numero secreto e " << NUMERO_SECRETO << ". Nao conte para ninguem!" << endl << endl;
 
     for(tentativas = 1; tentativas <= numeroDeTentativas; tentativas++){
 
